@@ -1,0 +1,30 @@
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonSDKTutorial.csprojResolveAssemblyReference.cache
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.MainForm.resources
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.Properties.Resources.resources
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.VideoForm2.resources
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonSDKTutorial.csproj.GenerateResource.Cache
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.TrustInfo.xml
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.exe.manifest
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.application
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe.config
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe.manifest
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.application
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.exe
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.pdb
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe
+D:\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.pdb
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonSDKTutorial.csprojResolveAssemblyReference.cache
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.MainForm.resources
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.Properties.Resources.resources
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse.VideoForm2.resources
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonSDKTutorial.csproj.GenerateResource.Cache
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.TrustInfo.xml
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.exe.manifest
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.application
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe.config
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe.manifest
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.application
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.exe
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\obj\x86\Debug\CanonPulse v2.0.pdb
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.exe
+D:\pepsi_source\CanonSDKTutorialV6\CanonSDKTutorial - Kopie\CanonSDKTutorial\CanonPulse v2.0.pdb

@@ -748,17 +748,17 @@
             this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versionLabel.Location = new System.Drawing.Point(172, 18);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(54, 25);
+            this.versionLabel.Size = new System.Drawing.Size(65, 25);
             this.versionLabel.TabIndex = 35;
-            this.versionLabel.Text = "v 2.0";
+            this.versionLabel.Text = "v 2.02";
             this.versionLabel.Click += new System.EventHandler(this.label17_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(279, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(303, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(226, 148);
+            this.pictureBox1.Size = new System.Drawing.Size(179, 73);
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
             // 

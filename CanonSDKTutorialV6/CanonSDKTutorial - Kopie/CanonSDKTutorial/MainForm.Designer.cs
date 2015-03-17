@@ -124,7 +124,7 @@
             // 
             // LiveViewButton
             // 
-            this.LiveViewButton.Location = new System.Drawing.Point(8, 20);
+            this.LiveViewButton.Location = new System.Drawing.Point(343, 49);
             this.LiveViewButton.Name = "LiveViewButton";
             this.LiveViewButton.Size = new System.Drawing.Size(70, 22);
             this.LiveViewButton.TabIndex = 2;
@@ -145,12 +145,14 @@
             // SessionButton
             // 
             this.SessionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SessionButton.Location = new System.Drawing.Point(6, 127);
+            this.SessionButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.SessionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SessionButton.Location = new System.Drawing.Point(6, 123);
             this.SessionButton.Name = "SessionButton";
-            this.SessionButton.Size = new System.Drawing.Size(84, 23);
+            this.SessionButton.Size = new System.Drawing.Size(129, 35);
             this.SessionButton.TabIndex = 7;
-            this.SessionButton.Text = "Open Session";
-            this.SessionButton.UseVisualStyleBackColor = true;
+            this.SessionButton.Text = "connect camera";
+            this.SessionButton.UseVisualStyleBackColor = false;
             this.SessionButton.Click += new System.EventHandler(this.SessionButton_Click);
             // 
             // SessionLabel
@@ -165,7 +167,6 @@
             // 
             // InitGroupBox
             // 
-            this.InitGroupBox.Controls.Add(this.RefreshButton);
             this.InitGroupBox.Controls.Add(this.CameraListBox);
             this.InitGroupBox.Controls.Add(this.SessionLabel);
             this.InitGroupBox.Controls.Add(this.SessionButton);
@@ -180,7 +181,7 @@
             // 
             this.RefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RefreshButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RefreshButton.Location = new System.Drawing.Point(96, 127);
+            this.RefreshButton.Location = new System.Drawing.Point(319, 41);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(31, 23);
             this.RefreshButton.TabIndex = 9;
@@ -198,7 +199,6 @@
             this.LiveViewGroupBox.Controls.Add(this.cb_verbose);
             this.LiveViewGroupBox.Controls.Add(this.msgBox);
             this.LiveViewGroupBox.Controls.Add(this.LiveViewPicBox);
-            this.LiveViewGroupBox.Controls.Add(this.LiveViewButton);
             this.LiveViewGroupBox.Location = new System.Drawing.Point(12, 176);
             this.LiveViewGroupBox.Name = "LiveViewGroupBox";
             this.LiveViewGroupBox.Size = new System.Drawing.Size(739, 442);
@@ -734,7 +734,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(594, 147);
+            this.button2.Location = new System.Drawing.Point(356, 41);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 34;
@@ -750,7 +750,7 @@
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(65, 25);
             this.versionLabel.TabIndex = 35;
-            this.versionLabel.Text = "v 2.02";
+            this.versionLabel.Text = "v 2.04";
             this.versionLabel.Click += new System.EventHandler(this.label17_Click);
             // 
             // pictureBox1
@@ -771,17 +771,19 @@
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel3);
+            this.Controls.Add(this.LiveViewButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.SettingsGroupBox);
             this.Controls.Add(this.LiveViewGroupBox);
             this.Controls.Add(this.InitGroupBox);
+            this.Controls.Add(this.RefreshButton);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(616, 657);
             this.Name = "MainForm";
-            this.Text = "pepsi pulse ctrl";
+            this.Text = "pepsi pulse camera";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.LiveViewPicBox)).EndInit();
             this.InitGroupBox.ResumeLayout(false);

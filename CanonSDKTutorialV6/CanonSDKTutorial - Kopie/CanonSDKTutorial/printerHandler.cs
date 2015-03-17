@@ -23,8 +23,6 @@ namespace CanonPulse
 
                     if (printLogMsg != null)
                         printLogMsg(this, EventArgs.Empty, "DEFAULT PRINTER IS " + settings.PrinterName);  
-    
-              
                 
             }
             else
@@ -67,7 +65,7 @@ namespace CanonPulse
                         printLogMsg(this, EventArgs.Empty, e.ToString());  
                    
                 }
-               
+            
             }
         }
     

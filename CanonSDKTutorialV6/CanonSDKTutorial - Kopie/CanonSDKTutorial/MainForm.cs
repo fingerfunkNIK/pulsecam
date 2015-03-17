@@ -21,7 +21,7 @@ namespace CanonPulse
         private VideoForm2 vf2 = null;
         private ArduinoComm ArduinoLink;
         private printerHandler printerhandler;
-
+        private FileInfo lastDownloadedFileFromCanonCamera;
         private Bitmap printCapture;
         public string lastSavedImageFileName;
 
@@ -189,9 +189,26 @@ namespace CanonPulse
         
 
         private void SessionButton_Click(object sender, EventArgs e)
-        {            
-            if (CameraHandler.CameraSessionOpen) CloseSession();
-            else OpenSession();
+        {
+            if (CameraHandler.CameraSessionOpen)
+            {
+                //CloseSession();
+                //CameraHandler.StopLiveView();
+                //LiveViewButton.Text = "Start LV";
+                //vf2.Dispose();
+             
+            }
+            else
+            {
+                OpenSession();
+                if (!CameraHandler.IsLiveViewOn) {
+                CameraHandler.StartLiveView();
+                LiveViewButton.Text = "Stop LV";
+                vf2 = new VideoForm2();
+                vf2.Show();
+                SessionButton.Enabled = false;
+            }
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -308,6 +325,7 @@ namespace CanonPulse
             //else if (STComputerButton.Checked)
             //{
             //    CameraHandler.SetSetting(EDSDK.PropID_SaveTo, (uint)EDSDK.EdsSaveTo.Host);
+         
             //    CameraHandler.SetCapacity();
             //    BrowseButton.Enabled = true;
             //    SavePathTextBox.Enabled = true;
@@ -421,7 +439,7 @@ namespace CanonPulse
         {
             currentSelfCamState = SELFCAMSTATE.NOTHING;
             vf2.changeSelfCamState(currentSelfCamState);
-  
+           // System.IO.File.Delete(lastDownloadedFileFromCanonCamera.FullName);//delete the last file here
             printtimer.Stop();
         }
 
@@ -691,6 +709,7 @@ namespace CanonPulse
         #region buttons
         private void snapshotBtn_Click(object sender, EventArgs e)
         {
+            emptyTempDirectory();
             countdownNumberOfHits = 0;
             countdowntimer.Interval = 1000; // specify interval time as you want
             countdowntimer.Start();
@@ -707,6 +726,7 @@ namespace CanonPulse
                     currentSelfCamState = SELFCAMSTATE.PRINTING;
                     printtimer.Interval = 3000;
                     printtimer.Start();
+               
                     vf2.showCancel();
                     isBPMMeasuring = false;
                 }
@@ -736,39 +756,31 @@ namespace CanonPulse
             }
             return lastWritenFile;
         }
+        private void emptyTempDirectory()
+        {
+            DirectoryInfo Directory = new DirectoryInfo(tempImageDirectory);
+            foreach (FileInfo file in Directory.GetFiles())
+            {
+                file.Delete();
+            }
+        }
 
         private void createPrintImg()
         {
            //this sometimes gets the next last image
             printCapture = new System.Drawing.Bitmap(1200, 1800);
             DirectoryInfo Directory = new DirectoryInfo(tempImageDirectory);
-            FileInfo fi = GetLatestWritenFileFileInDirectory(Directory);
+            lastDownloadedFileFromCanonCamera= GetLatestWritenFileFileInDirectory(Directory);
 
-            Bitmap image1 = (Bitmap)Image.FromFile(fi.FullName, true);
+            Bitmap image1 = (Bitmap)Image.FromFile(lastDownloadedFileFromCanonCamera.FullName, true);
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(printCapture))
             {
                 g.Clear(Color.Black);
                 g.DrawImage(vf2.printOverLay, new System.Drawing.Rectangle(0, 0, vf2.printOverLay.Width, vf2.printOverLay.Height));
                 g.DrawImage(image1, new System.Drawing.Rectangle(0, 70, vf2.printOverLay.Width, vf2.printOverLay.Width), new System.Drawing.Rectangle((image1.Width-vf2.printOverLay.Width)/2, 0, vf2.printOverLay.Width, vf2.printOverLay.Width), GraphicsUnit.Pixel);
             }
-
             instaCapture = new System.Drawing.Bitmap(640, 640);
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(instaCapture))
-            {
-                //g.Clear(System.Drawing.Color.Black); // Change this to whatever you want the background color to be, you may set this to Color.Transparent as well
-                //g.DrawImage(vf2.bild, new System.Drawing.Rectangle(-319, -44, 1280, 720));//just guessing here
-                //if (!isBPMMeasuring)
-                //{
-                //    g.DrawImage(vf2.instaOver, new System.Drawing.Rectangle(0, 0, 640, 640));
-                //}
-                //else
-                //{
-                //    g.DrawImage(vf2.instaOverBPM, new System.Drawing.Rectangle(0, 0, 640, 640));
-                //    RectangleF rectf = new RectangleF(415, 543, 140, 50);
-                //    g.DrawString(MainForm.currentAvgBPM.ToString("0") + " BPM", new Font("Sofia Pro Bold", 18), Brushes.White, rectf);
-
-                //}
-            }
+            
         }
         private void OK_btn_Click(object sender, EventArgs e)
         {

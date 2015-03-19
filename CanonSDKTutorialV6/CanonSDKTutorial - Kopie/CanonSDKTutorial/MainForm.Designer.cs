@@ -391,7 +391,7 @@
             this.panel2.Controls.Add(this.print2_rb);
             this.panel2.Controls.Add(this.print1_rb);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Location = new System.Drawing.Point(594, 86);
+            this.panel2.Location = new System.Drawing.Point(584, 22);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(125, 45);
             this.panel2.TabIndex = 14;
@@ -442,8 +442,7 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.timeUpDown);
-            this.panel4.Location = new System.Drawing.Point(594, 25);
+            this.panel4.Location = new System.Drawing.Point(328, 21);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(133, 46);
             this.panel4.TabIndex = 22;
@@ -451,7 +450,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 0);
+            this.label7.Location = new System.Drawing.Point(4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 20;
@@ -459,7 +458,7 @@
             // 
             // timeUpDown
             // 
-            this.timeUpDown.Location = new System.Drawing.Point(3, 16);
+            this.timeUpDown.Location = new System.Drawing.Point(331, 47);
             this.timeUpDown.Name = "timeUpDown";
             this.timeUpDown.Size = new System.Drawing.Size(120, 20);
             this.timeUpDown.TabIndex = 19;
@@ -750,7 +749,7 @@
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(65, 25);
             this.versionLabel.TabIndex = 35;
-            this.versionLabel.Text = "v 2.04";
+            this.versionLabel.Text = "v 2.05";
             this.versionLabel.Click += new System.EventHandler(this.label17_Click);
             // 
             // pictureBox1
@@ -768,6 +767,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 631);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.timeUpDown);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel3);

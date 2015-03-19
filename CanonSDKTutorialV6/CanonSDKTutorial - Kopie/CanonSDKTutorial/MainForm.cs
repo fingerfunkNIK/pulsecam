@@ -76,6 +76,7 @@ namespace CanonPulse
             TIMERRUNNING,
             SHUTTERACTION,
             WAITFOROK,
+            DOWNLOADINGFOTO,
             PRINTING
         }
  
@@ -140,7 +141,7 @@ namespace CanonPulse
 
             numHitsBeforeTrig = Properties.Settings.Default.selfTimerLen;
             timeUpDown.Value = numHitsBeforeTrig;
-
+            
             numPicsToTake = 1;
             isVerbose = Properties.Settings.Default.verbose;
             cb_verbose.Checked = isVerbose;
@@ -709,12 +710,60 @@ namespace CanonPulse
         #region buttons
         private void snapshotBtn_Click(object sender, EventArgs e)
         {
-            emptyTempDirectory();
-            countdownNumberOfHits = 0;
-            countdowntimer.Interval = 1000; // specify interval time as you want
-            countdowntimer.Start();
-            currentSelfCamState = SELFCAMSTATE.TIMERRUNNING;
-            isBPMMeasuring = false;
+            if (currentSelfCamState == SELFCAMSTATE.NOTHING)
+            {
+                emptyTempDirectory();
+                countdownNumberOfHits = 0;
+                countdowntimer.Interval = 1000; // specify interval time as you want
+                countdowntimer.Start();
+                currentSelfCamState = SELFCAMSTATE.TIMERRUNNING;
+                isBPMMeasuring = false;
+            }
+            else
+            {
+                audiohandler.playsound(audioHandler.SOUNDTYPE.ERROR);
+            }
+        }
+        private void OK_btn_Click(object sender, EventArgs e)
+        {
+
+            if (currentCamType == CAMTYPE.SELFTIMER)
+            {
+                if (currentSelfCamState == SELFCAMSTATE.WAITFOROK)
+                {
+                    //check if we have a temp image first
+                    DirectoryInfo Directory = new DirectoryInfo(tempImageDirectory);
+
+                    if (GetLatestWritenFileFileInDirectory(Directory) != null)
+                    {
+                        currentSelfCamState = SELFCAMSTATE.PRINTING;
+                        createPrintImg();
+                        printCapture.Save(lastSavedImageFileName, ImageFormat.Png);
+                        //instaCapture.Save(instaFileNameWithPath, ImageFormat.Png);
+                        printerhandler.printIt(lastSavedImageFileName, numcopiestoprint);
+                        if (numcopiestoprint > 0)
+                        {
+                            printtimer.Interval = 10000;
+                            printtimer.Start();
+                            isBPMMeasuring = false;
+                            vf2.showThanks();
+                        }
+                        else
+                        {
+                            printtimer.Interval = 4000;
+                            printtimer.Start();
+                            vf2.showThanks();
+                            isBPMMeasuring = false;
+                        }
+                    }
+                    else
+                        audiohandler.playsound(audioHandler.SOUNDTYPE.ERROR);
+                }
+                else
+                {
+                    audiohandler.playsound(audioHandler.SOUNDTYPE.ERROR);
+                }
+            }
         }
 
         private void cancel_btn_Click(object sender, EventArgs e)
@@ -726,14 +775,15 @@ namespace CanonPulse
                     currentSelfCamState = SELFCAMSTATE.PRINTING;
                     printtimer.Interval = 3000;
                     printtimer.Start();
-               
                     vf2.showCancel();
                     isBPMMeasuring = false;
                 }
+                else
+                    audiohandler.playsound(audioHandler.SOUNDTYPE.ERROR);
             }
             else
             {
-                MessageBox.Show("err " + currentSelfCamState);
+                audiohandler.playsound(audioHandler.SOUNDTYPE.ERROR);
             }
 
         }
@@ -782,47 +832,7 @@ namespace CanonPulse
             instaCapture = new System.Drawing.Bitmap(640, 640);
             
         }
-        private void OK_btn_Click(object sender, EventArgs e)
-        {
-            if (currentCamType == CAMTYPE.PULSETRIGGERED)
-            {
-                if (currentPulseCamState == PULSECAMSTATE.WAITFOROK)
-                {
-                    currentPulseCamState = PULSECAMSTATE.PRINTING;
-                }
-            }
-            if (currentCamType == CAMTYPE.SELFTIMER)
-            {
-                if (currentSelfCamState == SELFCAMSTATE.WAITFOROK)
-                {
-                    currentSelfCamState = SELFCAMSTATE.PRINTING;
-                    createPrintImg();
-                    printCapture.Save(lastSavedImageFileName, ImageFormat.Png);
-                    //instaCapture.Save(instaFileNameWithPath, ImageFormat.Png);
-                    printerhandler.printIt(lastSavedImageFileName, numcopiestoprint);
-                    if (numcopiestoprint > 0)
-                    {
-                        printtimer.Interval = 10000;
-                        printtimer.Start();
-                        isBPMMeasuring = false;
-                        vf2.showThanks();
-                    }
-                    else
-                    {
-                        printtimer.Interval = 4000;
-                        printtimer.Start();
-                        vf2.showThanks();
-                        isBPMMeasuring = false;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("err " + currentSelfCamState);
-                }
-            }
-
-
-        }
+    
 
        
         #endregion
@@ -835,7 +845,7 @@ namespace CanonPulse
             //save it first..
             vf2.savePreview(Evf_Bmp);
             CameraHandler.TakePhoto();
-            currentSelfCamState = SELFCAMSTATE.WAITFOROK;
+            currentSelfCamState = SELFCAMSTATE.DOWNLOADINGFOTO;
             vf2.changeSelfCamState(currentSelfCamState);
 
             DateTime d = DateTime.Now;
@@ -872,81 +882,7 @@ namespace CanonPulse
             vf2.changeSelfCamState(currentSelfCamState);
         }
 
-        private void takeSnapShotOld()
-        {
-            //TODO CHANGE THIS TO USE THE ACTUAL CAM IMAGE INSTEAD
-           
-            currentSelfCamState = SELFCAMSTATE.WAITFOROK;
-            vf2.changeSelfCamState(currentSelfCamState);
-
-            printCapture = new System.Drawing.Bitmap(768, 1366);
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(printCapture))
-            {
-                g.Clear(System.Drawing.Color.Black); // Change this to whatever you want the background color to be, you may set this to Color.Transparent as well
-                g.DrawImage(vf2.bild, new System.Drawing.Rectangle(-280, 147, 1280, 720));//fix this
-                if (!isBPMMeasuring)
-                {
-                    g.DrawImage(vf2.printOverLay, new System.Drawing.Rectangle(0, 0, 768, 1366));
-                }
-                else
-                {
-                    g.DrawImage(vf2.printOverLayBPM, new System.Drawing.Rectangle(0, 0, 768, 1366));
-                    RectangleF rectf = new RectangleF(490, 734, 140, 50);
-                    g.DrawString(MainForm.currentAvgBPM.ToString("0") + " BPM", new Font("Sofia Pro Bold", 18), Brushes.White, rectf);
-                }
-            }
-
-            instaCapture = new System.Drawing.Bitmap(640, 640);
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(instaCapture))
-            {
-                g.Clear(System.Drawing.Color.Black); // Change this to whatever you want the background color to be, you may set this to Color.Transparent as well
-                g.DrawImage(vf2.bild, new System.Drawing.Rectangle(-319, -44, 1280, 720));//just guessing here
-                if (!isBPMMeasuring)
-                {
-                    g.DrawImage(vf2.instaOver, new System.Drawing.Rectangle(0, 0, 640, 640));
-                }
-                else
-                {
-                    g.DrawImage(vf2.instaOverBPM, new System.Drawing.Rectangle(0, 0, 640, 640));
-                    RectangleF rectf = new RectangleF(415, 543, 140, 50);
-                    g.DrawString(MainForm.currentAvgBPM.ToString("0") + " BPM", new Font("Sofia Pro Bold", 18), Brushes.White, rectf);
-
-                }
-            }
-
-            DateTime d = DateTime.Now;
-            string todayDate = d.Year + "_" + d.Month.ToString("D2") + "_" + d.Day.ToString("D2");
-            string todayPrintDirectory = printImageDirectory + @"\" + todayDate;
-            string todayInstaDirectory = instaImageDirectory + @"\" + todayDate;
-            try
-            {
-                if (!Directory.Exists(todayPrintDirectory))
-                    Directory.CreateDirectory(todayPrintDirectory);
-            }
-            catch (Exception x)
-            {
-                string ertype = x.GetType().ToString();
-                MessageBox.Show("create directory failed: " + ertype + "   " + todayPrintDirectory);
-            }
-            try
-            {
-                if (!Directory.Exists(todayInstaDirectory))
-                    Directory.CreateDirectory(todayInstaDirectory);
-            }
-            catch (Exception x)
-            {
-                string ertype = x.GetType().ToString();
-                MessageBox.Show("create directory failed: " + ertype + "   " + todayInstaDirectory);
-            }
-
-            string fname = d.ToString("HH") + "_" + d.Minute.ToString("D2") + "_" + d.Second.ToString("D2") + "_" + d.Millisecond.ToString() + ".png";
-            lastSavedImageFileName = todayPrintDirectory + @"\" + fname;
-            instaFileNameWithPath = todayInstaDirectory + @"\" + fname;
-
-            audiohandler.playsound(audioHandler.SOUNDTYPE.SHUTTER);
-            currentSelfCamState = SELFCAMSTATE.WAITFOROK;
-            vf2.changeSelfCamState(currentSelfCamState);
-        }
+      
 
         private void LiveViewPicBox_Click(object sender, EventArgs e)
         {

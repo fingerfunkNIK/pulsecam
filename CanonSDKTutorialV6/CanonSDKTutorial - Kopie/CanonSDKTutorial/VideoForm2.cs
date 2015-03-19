@@ -68,11 +68,13 @@ namespace CanonPulse
                 stopLiveVideo = true;
                 return;
             }
-            else
+            if (scs == MainForm.SELFCAMSTATE.DOWNLOADINGFOTO)
             {
+                return;
+            }
+
                 Clear();
                 stopLiveVideo = false;
-            }
         }
 
         public void showCancel()
@@ -104,7 +106,7 @@ namespace CanonPulse
             System.Drawing.Bitmap finalImage = new System.Drawing.Bitmap(1366, 768);
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(finalImage))
             {
-                //g.Clear(System.Drawing.Color.Black); // Change this to whatever you want the background color to be, you may set this to Color.Transparent as well
+                g.Clear(System.Drawing.Color.Black); // Change this to whatever you want the background color to be, you may set this to Color.Transparent as well
                 try {
                 g.DrawImage(bild, new System.Drawing.Rectangle(43, 24, 1280, 720));
                 if (!MainForm.isBPMMeasuring)

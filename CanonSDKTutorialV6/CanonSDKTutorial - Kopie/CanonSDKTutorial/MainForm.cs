@@ -146,7 +146,10 @@ namespace CanonPulse
             isVerbose = Properties.Settings.Default.verbose;
             cb_verbose.Checked = isVerbose;
             cb_verbose.CheckedChanged += cb_verbose_CheckedChanged;
-    
+
+
+            button1.Visible = false;
+            button1.Enabled = false;//DEBUG TEST OF IMAGE HANDLING
         }
 
 
@@ -817,7 +820,7 @@ namespace CanonPulse
 
         private void createPrintImg()
         {
-           //this sometimes gets the next last image
+
             printCapture = new System.Drawing.Bitmap(1200, 1800);
             DirectoryInfo Directory = new DirectoryInfo(tempImageDirectory);
             lastDownloadedFileFromCanonCamera= GetLatestWritenFileFileInDirectory(Directory);
@@ -825,9 +828,11 @@ namespace CanonPulse
             Bitmap image1 = (Bitmap)Image.FromFile(lastDownloadedFileFromCanonCamera.FullName, true);
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(printCapture))
             {
+                //just changed order, to make it transparent here
                 g.Clear(Color.Black);
-                g.DrawImage(vf2.printOverLay, new System.Drawing.Rectangle(0, 0, vf2.printOverLay.Width, vf2.printOverLay.Height));
                 g.DrawImage(image1, new System.Drawing.Rectangle(0, 70, vf2.printOverLay.Width, vf2.printOverLay.Width), new System.Drawing.Rectangle((image1.Width-vf2.printOverLay.Width)/2, 0, vf2.printOverLay.Width, vf2.printOverLay.Width), GraphicsUnit.Pixel);
+                g.DrawImage(vf2.printOverLay, new System.Drawing.Rectangle(0, 0, vf2.printOverLay.Width, vf2.printOverLay.Height));
+                g.Save();//???
             }
             instaCapture = new System.Drawing.Bitmap(640, 640);
             
@@ -944,23 +949,41 @@ namespace CanonPulse
             if(vf2!=null)
             vf2.Clear();
         }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-     
-
    
-
      
 
-        
+        #region testgraphics
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Bitmap testcap = new System.Drawing.Bitmap(1200, 1800);
+            Bitmap image1 = (Bitmap)Image.FromFile(@"D:\PepsiPulse\TMP\IMG_0001.JPG", true);
+            Image printOverLay = (Bitmap)Image.FromFile(@"D:\PepsiPulse\PNG\pepsi_print2.png");
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(testcap))
+            {
+                //just changed order, to make it transparent here
+                g.Clear(Color.Black);
+                g.DrawImage(image1, new System.Drawing.Rectangle(0, 70, printOverLay.Width, printOverLay.Width), new System.Drawing.Rectangle((image1.Width - printOverLay.Width) / 2, 0, printOverLay.Width, printOverLay.Width), GraphicsUnit.Pixel);
+                g.DrawImage(printOverLay, new System.Drawing.Rectangle(0, 0, printOverLay.Width, printOverLay.Height));
+                g.Save();//???
+            }
+             DateTime d = DateTime.Now;
+             string fname = @"D:\PepsiPulse\TMP\" + d.ToString("HH") + "_" + d.Minute.ToString("D2") + "_" + d.Second.ToString("D2") + "_" + d.Millisecond.ToString() + ".png";
+            testcap.Save(fname, ImageFormat.Png);
+           // instaCapture = new System.Drawing.Bitmap(640, 640);
+        }
+        #endregion
 
-        
 
-        
+
+
+
+
+
+
+
+
+
+
     }
   
 }
